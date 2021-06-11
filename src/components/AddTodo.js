@@ -1,27 +1,38 @@
-import { useState } from 'react'
+import { useState } from 'react'; //import useState hook to use State
 
-const AddTodo = ({ onAdd }) => { 
-    const [item, setItem] = useState('')
+// AddTodo fct component; using onAdd props from top level
+const AddTodo = ({ onAdd }) => {
+  // name of State, item; setItem fct to update State
+  const [item, setItem] = useState('');
 
-    const onSubmit = (e) => {
-        e.preventDefault()
-        onAdd({item})
+  // onSubmit (click) handler fct
+  const onSubmit = (e) => {
+    // preventDefault called on event object to prevent browser reload/refresh
+    e.preventDefault();
 
-        setItem('')
-    }
+    //onAdd event prop with new item
+    onAdd({ item });
 
-    return (
-        <form onSubmit={onSubmit}>
-            <label>Add Todo:</label>
-            <input 
-                type="text" 
-                placeholder="Todo Item"
-                value={item}
-                onChange={ (e) => setItem(e.target.value)}
-            /> 
-            <input type="submit" value="Add Todo" />
-        </form>
-    )
-}
+    // updating State back to empty
+    setItem('');
+  };
 
-export default AddTodo
+  // AddToo returns a form with input and submit
+  return (
+    // onSubmit event prop takes in onSubmit fct
+    <form onSubmit={onSubmit}>
+      <label>Add Todo:</label>
+      <input
+        type="text"
+        placeholder="Todo Item"
+        //adding value of item aka text of todo
+        value={item}
+        // onChange event prop takes in event handler and setItem change of State
+        onChange={(e) => setItem(e.target.value)}
+      />
+      <input type="submit" value="Add Todo" />
+    </form>
+  );
+};
+
+export default AddTodo;
